@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(void) {
-	cout.tie(NULL);
+	cin.tie(NULL);
 	ios_base::sync_with_stdio(false);
 
 	int n, x;
