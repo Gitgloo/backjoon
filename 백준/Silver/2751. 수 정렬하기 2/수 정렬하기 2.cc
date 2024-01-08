@@ -23,6 +23,8 @@ int main(void) {
 		cout << arr[i] << '\n';
 	}
 
+	delete arr;
+
 	return 0;
 }
 
@@ -63,4 +65,6 @@ void mergeArray(int* arr1, unsigned int len1, int* arr2, unsigned int len2) {
 	for (int i = 0; i < n; i++) {
 		arr1[i] = temp[i];
 	}
+
+	delete temp;
 }
