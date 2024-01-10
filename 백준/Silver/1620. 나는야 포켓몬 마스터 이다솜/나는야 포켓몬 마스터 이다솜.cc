@@ -10,21 +10,19 @@ int main(void) {
 
 	int n, m;
 	map<string, int> mapByName;
-	map<int, string> mapByNum;
 
 	cin >> n >> m;
+	string* arr = new string[n + 1];
 	for (int i = 1; i <= n; i++) {
-		string name;
-		cin >> name;
-		mapByName.insert({ name, i });
-		mapByNum.insert({ i, name });
+		cin >> arr[i];
+		mapByName.insert({ arr[i], i });
 	}
 
 	while (m--) {
 		string temp;
 		cin >> temp;
 		if (temp[0] >= '0' && temp[0] <= '9') {
-			cout << mapByNum.find(stoi(temp))->second << '\n';
+			cout << arr[stoi(temp)] << '\n';
 		} else {
 			cout << mapByName.find(temp)->second << '\n';
 		}
