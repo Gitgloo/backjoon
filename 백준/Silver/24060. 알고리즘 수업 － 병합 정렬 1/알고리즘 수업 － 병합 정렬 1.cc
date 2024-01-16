@@ -52,6 +52,9 @@ bool merge(int* arr, int p, int q, int r) {
 
 
 int main(void) {
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    
 	int n;
 
 	cin >> n >> k;
