@@ -2,10 +2,10 @@
 
 using namespace std;
 
-int recur(string* word, int left, int right) {
+int recur(string& word, int left, int right) {
 	if (left >= right)
 		return 1;
-	if ((*word)[left] != (*word)[right])
+	if (word[left] != word[right])
 		return -1;
 	int ret = recur(word, left + 1, right - 1);
 	if (ret > 0)
@@ -13,8 +13,8 @@ int recur(string* word, int left, int right) {
 	return ret - 1;
 }
 
-void checkPalindrome(string* word) {
-	int ret = recur(word, 0, (*word).length() - 1);
+void checkPalindrome(string& word) {
+	int ret = recur(word, 0, word.length() - 1);
 	if (ret > 0)
 		cout << 1 << ' ' << ret << '\n';
 	else
@@ -32,7 +32,7 @@ int main(void) {
 		string word;
 
 		cin >> word;
-		checkPalindrome(&word);
+		checkPalindrome(word);
 	}
 
 	return 0;
