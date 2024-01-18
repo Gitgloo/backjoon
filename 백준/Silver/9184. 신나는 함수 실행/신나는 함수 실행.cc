@@ -5,6 +5,9 @@ using namespace std;
 int w(int a, int b, int c, int dp[21][21][21]);
 
 int main(void) {
+	cin.tie(NULL);
+	ios_base::sync_with_stdio(false);
+
 	int dp[21][21][21];
 
 	for (int i = 0; i < 21; i++) {
