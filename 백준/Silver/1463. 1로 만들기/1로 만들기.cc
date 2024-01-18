@@ -4,8 +4,6 @@
 
 using namespace std;
 
-int cal(int* dp, int n);
-
 int main(void) {
 	int n;
 
@@ -14,28 +12,19 @@ int main(void) {
 	dp[1] = 0;
 	
 	for (int i = 2; i <= n; i++) {
-		dp[i] = -1;
+		dp[i] = dp[i - 1] + 1;
+
+		if(i % 3 == 0)
+			dp[i] = MIN(dp[i], dp[i / 3] + 1);
+
+		if (i % 2 == 0)
+			dp[i] = MIN(dp[i], dp[i / 2] + 1);
 	}
 
-	cout << cal(dp, n) << endl;
+	cout << dp[n] << endl;
 
 	delete[] dp;
 	dp = nullptr;
 
 	return 0;
-}
-
-int cal(int* dp, int n) {
-	if (dp[n] >= 0)
-		return dp[n];
-
-	dp[n] = cal(dp, n - 1) + 1;
-
-	if (n % 3 == 0)
-		dp[n] = MIN(dp[n], cal(dp, n / 3) + 1);
-
-	if (n % 2 == 0)
-		dp[n] = MIN(dp[n], cal(dp, n / 2) + 1);
-
-	return dp[n];
 }
