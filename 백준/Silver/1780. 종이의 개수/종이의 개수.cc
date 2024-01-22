@@ -11,6 +11,9 @@ bool isSameColor(int** arr, int n, int x, int y);
 
 
 int main(void) {
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    
 	int n;
 
 	cin >> n;
