@@ -4,6 +4,9 @@
 using namespace std;
 
 int main(void) {
+	cin.tie(NULL);
+	ios_base::sync_with_stdio(false);
+
 	int n, c, left{ 0 }, right{ 1000000000 };
 
 	cin >> n >> c;
