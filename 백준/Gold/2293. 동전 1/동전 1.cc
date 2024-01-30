@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(void) {
-	int n, k, dp[2][10001] = { {1} };
+	int n, k, dp[10001] = {1};
 
 	cin >> n >> k;
 	
@@ -11,19 +11,14 @@ int main(void) {
 		int coin;
 
 		cin >> coin;
-		for (int j = 0; j < k; j++) {
-			for (int l = j + coin; l <= k; l += coin) {
-				dp[(i + 1) % 2][l] += dp[i % 2][j];
+		for (int j = k; j >= coin; j--) {
+			for (int l = coin; l <= j; l += coin) {
+				dp[j] += dp[j - l];
 			}
-		}
-
-		for (int j = 0; j <= k; j++) {
-			dp[(i + 1) % 2][j] += dp[i % 2][j];
-			dp[i % 2][j] = 0;
 		}
 	}
 
-	cout << dp[n % 2][k] << endl;
+	cout << dp[k] << endl;
 
 	return 0;
 }
