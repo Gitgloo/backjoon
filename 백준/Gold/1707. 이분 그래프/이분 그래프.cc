@@ -7,9 +7,12 @@ using namespace std;
 bool bfs(int start);
 
 vector<int> edgeArray[20001];
-bool visited[2][20001];
+int teamCheck[20001];
 
 int main(void) {
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    
 	int k;
 
 	cin >> k;
@@ -21,10 +24,9 @@ int main(void) {
 		for (int i = 1; i <= v; i++) {
 			edgeArray[i].clear();
 		}
-		for (int i = 0; i < 2; i++) {
-			for (int j = 1; j <= v; j++) {
-				visited[i][j] = false;
-			}
+
+		for (int i = 1; i <= v; i++) {
+			teamCheck[i] = -1;
 		}
 
 		while (e--) {
@@ -36,7 +38,7 @@ int main(void) {
 		}
 
 		for (int i = 1; i <= v; i++) {
-			if (!visited[0][i] && !visited[1][i] && !bfs(i)) {
+			if (teamCheck[i] == -1 && !bfs(i)) {
 				result = false;
 				break;
 			}
@@ -49,16 +51,17 @@ int main(void) {
 }
 
 bool bfs(int start) {
-	int team = 0;
+	int teamA = 0, teamB = 1;
 	queue<int> q;
 	q.push(start);
-	visited[0][start] = true;
+	teamCheck[start] = teamA;
 
 	while (true) {
 		int stepSize = q.size();
 		if (stepSize == 0)
 			break;
-		team ^= 1;
+		teamA ^= 1;
+		teamB ^= 1;
 		for (int i = 0; i < stepSize; i++) {
 			int now = q.front();
 			
@@ -66,10 +69,10 @@ bool bfs(int start) {
 			vector<int> edges = edgeArray[now];
 			for (int i = 0; i < edges.size(); i++) {
 				int next = edges[i];
-				if (visited[team ^ 1][next])
+				if (teamCheck[next] == teamB)
 					return false;
-				if (!visited[team][next]) {
-					visited[team][next] = true;
+				if (teamCheck[next] == -1) {
+					teamCheck[next] = teamA;
 					q.push(next);
 				}
 			}
