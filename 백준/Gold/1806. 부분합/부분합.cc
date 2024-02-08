@@ -6,6 +6,9 @@
 using namespace std;
 
 int main(void) {
+	cin.tie(NULL);
+	ios_base::sync_with_stdio(false);
+
 	int n, s, left{ -1 }, right{ -1 }, length{ 100001 }, sum{ 0 };
 	vector<int> v;
 
