@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
             String str;
             while((str = br.readLine())!=null){
                 int N = Integer.parseInt(str);
@@ -38,11 +37,10 @@ public class Main {
                 makeCantorSet(0, len);  // len으로 대체!
 //                System.out.println(sb.toString());
 //                System.out.println(sb); // sb 그냥 이렇게 해도 될거야 그 오버라이딩인가 오버로딩인가 돼있을거니깐
-                for(char ch : sb){
-                    bw.write(ch);
-                }
-                bw.write('\n');
-                bw.flush();
+                // 처음에 반복분 돌리면서 한 글자씩 Sout하니깐 시간초과뜨더라고
+                // 찾아보니깐 StringBuilder도 이런식으로 한대
+                // char[]를 가지고 쓰는게 맞더라고
+                System.out.println(new String(sb));
             }
 
         }catch(Exception e){
