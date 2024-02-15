@@ -7,7 +7,7 @@
 using namespace std;
 
 struct edge {
-	int u, v, w;
+	int v, w;
 };
 
 bool operator<(edge a, edge b) {
@@ -33,26 +33,26 @@ int main(void) {
 		int u, v, w;
 
 		cin >> u >> v >> w;
-		edgeArray[u].push_back({ u, v, w });
+		edgeArray[u].push_back({ v, w });
 	}
 	
 	cin >> start >> end;
 	dist[start] = 0;
-	for (int i = 0; i < edgeArray[start].size(); i++) {
-		pq.push(edgeArray[start][i]);
-	}
+	pq.push({ start, 0 });
 
 	while (pq.size()) {
 		edge nowEdge = pq.top();
 		pq.pop();
-
-		int nextDist = dist[nowEdge.u] + nowEdge.w;
-		if (nextDist < dist[nowEdge.v]) {
-			dist[nowEdge.v] = nextDist;
-			save[nowEdge.v] = nowEdge.u;
+			
+		if (nowEdge.w < dist[end]) {
 			vector<edge> edges = edgeArray[nowEdge.v];
 			for (int i = 0; i < edges.size(); i++) {
-				pq.push(edges[i]);
+				int nextDist = nowEdge.w + edges[i].w;
+				if (nextDist < dist[edges[i].v]) {
+					dist[edges[i].v] = nextDist;
+					save[edges[i].v] = nowEdge.v;
+					pq.push({ edges[i].v, nextDist });
+				}
 			}
 		}
 	}
