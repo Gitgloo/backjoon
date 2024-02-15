@@ -6,14 +6,14 @@
 using namespace std;
 
 int main(void) {
+	cin.tie(NULL);
+	ios_base::sync_with_stdio(false);
+
 	int n, m;
 
 	cin >> n >> m;
 	vector<vector<int>> arr(n + 1, vector<int>(n + 1, INF));
 	vector<vector<vector<int>>> save(n + 1, vector<vector<int>>(n + 1));
-	//for (int i = 1; i <= n; i++) {
-	//	arr[i][i] = 0;
-	//}
 
 	while (m--) {
 		int a, b, c;
