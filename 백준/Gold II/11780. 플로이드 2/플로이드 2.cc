@@ -1,8 +1,9 @@
 #include <iostream>
-#include <vector>
+#include <queue>
 
 #define INF 1000000000
 #define MIN(x, y) ((x) > (y) ? (y) : (x))
+
 using namespace std;
 
 int main(void) {
@@ -10,10 +11,17 @@ int main(void) {
 	ios_base::sync_with_stdio(false);
 
 	int n, m;
+	queue<int> path;
 
 	cin >> n >> m;
 	vector<vector<int>> arr(n + 1, vector<int>(n + 1, INF));
-	vector<vector<vector<int>>> save(n + 1, vector<vector<int>>(n + 1));
+	vector<vector<int>> save(n + 1, vector<int>(n + 1));
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			save[i][j] = j;
+		}
+	}
+
 
 	while (m--) {
 		int a, b, c;
@@ -30,17 +38,7 @@ int main(void) {
 				int temp = arr[i][k] + arr[k][j];
 				if (temp < arr[i][j]) {
 					arr[i][j] = temp;
-					vector<int>& nowSave = save[i][j];
-					vector<int>& frontSave = save[i][k];
-					vector<int>& backSave = save[k][j];
-					nowSave.clear();
-					for (int l = 0; l < frontSave.size(); l++) {
-						nowSave.push_back(frontSave[l]);
-					}
-					nowSave.push_back(k);
-					for (int l = 0; l < backSave.size(); l++) {
-						nowSave.push_back(backSave[l]);
-					}
+					save[i][j] = save[i][k];
 				}
 			}
 		}
@@ -55,15 +53,21 @@ int main(void) {
 
 	for (int i = 1; i <= n; i++) {
 		for (int j = 1; j <= n; j++) {
-			vector<int> temp = save[i][j];
 			if (arr[i][j] == INF) {
 				cout << "0\n";
 			} else {
-				cout << temp.size() + 2 << ' ' << i;
-				for (int k = 0; k < temp.size(); k++) {
-					cout << ' ' << temp[k];
+				int now = i;
+				path.push(now);
+				while (now != j) {
+					now = save[now][j];
+					path.push(now);
 				}
-				cout << ' ' << j << '\n';
+				cout << path.size();
+				while (path.size()) {
+					cout << ' ' << path.front();
+					path.pop();
+				}
+				cout << '\n';
 			}
 		}
 	}
