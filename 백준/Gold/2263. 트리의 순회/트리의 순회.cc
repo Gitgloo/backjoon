@@ -5,6 +5,7 @@ using namespace std;
 
 vector<int> inorder;
 vector<int> postorder;
+vector<int> inorderMap;
 vector<bool> visited;
 
 void printPreorder(int right1, int right2);
@@ -18,10 +19,12 @@ int main(void) {
 	cin >> n;
 	inorder.resize(n);
 	postorder.resize(n);
+	inorderMap.resize(n + 1);
 	visited.resize(n);
 
 	for (int i = 0; i < n; i++) {
 		cin >> inorder[i];
+		inorderMap[inorder[i]] = i;
 	}
 
 	for (int i = 0; i < n; i++) {
@@ -36,15 +39,12 @@ int main(void) {
 void printPreorder(int right1, int right2) {
 	if (right2 < 0 || visited[right2])
 		return;
-	visited[right2] = true;
 
-	int i = -1;
 	int parent = postorder[right2];
+	int diff = right1 - inorderMap[parent] + 1;
 
+	visited[right2] = true;
 	cout << parent << ' ';
-
-	while (inorder[right1 - ++i] != parent);
-	
-	printPreorder(right1 - i - 1, right2 - i - 1);
+	printPreorder(right1 - diff, right2 - diff);
 	printPreorder(right1, right2 - 1);
 }
