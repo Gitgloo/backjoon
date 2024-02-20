@@ -9,6 +9,9 @@ vector<vector<int>> childVector;
 bool recur(int parent, int child);
 
 int main(void) {
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    
 	int test = 1;
 
 	while (true) {
