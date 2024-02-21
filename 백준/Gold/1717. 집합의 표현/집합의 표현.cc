@@ -38,11 +38,11 @@ int main(void) {
 
 void unionFunc(int a, int b) {
 	int parentA = findParent(a);
-
 	if (parents[b] != b) {
 		unionFunc(parentA, parents[b]);
+	} else {
+		parents[b] = parentA;
 	}
-	parents[b] = parentA;
 }
 
 bool checkFunc(int a, int b) {
@@ -53,7 +53,9 @@ bool checkFunc(int a, int b) {
 }
 
 int findParent(int n) {
-	if (parents[n] != n)
-		return findParent(parents[n]);
-	return n;
+	if (parents[n] == n)
+		return n;
+	parents[n] = findParent(parents[n]);
+
+	return parents[n];
 }
