@@ -1,4 +1,7 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
     static int n, m, arr[];
@@ -37,13 +40,19 @@ public class Main {
     }
 
     public static void input(){
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = null;
+        try {
+            st = new StringTokenizer(br.readLine());
+            n = Integer.parseInt(st.nextToken());
+            m = Integer.parseInt(st.nextToken());
 
-        n = sc.nextInt();
-        m = sc.nextInt();
-        arr = new int[n];
-        for(int i = 0; i < n; i++){
-            arr[i] = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            arr = new int[n];
+            for(int i = 0; i < n; i++){
+                arr[i] = Integer.parseInt(st.nextToken());
+            }
+        } catch (IOException e) {
         }
     }
 }
