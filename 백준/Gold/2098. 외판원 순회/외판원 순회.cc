@@ -28,7 +28,7 @@ int recur(int bits, int end) {
 		return dp[bits][end] = (cost[0][end] ? cost[0][end] : INF);
 
 	for (int i = 1; i < n; i++) {
-		if (i == end || (tempBits & (1 << i)) == 0 || cost[i][end] == 0)
+		if ((tempBits & (1 << i)) == 0 || cost[i][end] == 0)
 			continue;
 
 		min = MIN(min, recur(tempBits, i) + cost[i][end]);
